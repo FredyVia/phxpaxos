@@ -82,6 +82,7 @@ function install_leveldb()
 
 function check_protobuf_installed()
 {
+    go_back;
     cd $lib_name;
     bin_dir=$(pwd)"/bin";
     include_dir=$(pwd)"/include";
@@ -150,6 +151,7 @@ function install_glog()
     cmake -DBUILD_SHARED_LIBS=OFF -S . -B build -G "Unix Makefiles" -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_FLAGS="-fPIC" -DCMAKE_INSTALL_PREFIX=$(pwd);
     cmake --build build --parallel $(nproc);
     cmake --build build --target install;
+
 
     check_lib_exist $lib_name;
     if [ $? -eq 1 ]; then
