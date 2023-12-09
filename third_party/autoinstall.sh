@@ -121,7 +121,7 @@ function install_protobuf()
     fi
 
     ./autogen.sh;
-    ./configure CXXFLAGS=-fPIC --prefix=$(pwd);
+    ./configure CXX=g++-9 CXXFLAGS=-fPIC --prefix=$(pwd);
     make && make install;
 
     check_protobuf_installed $lib_name;
