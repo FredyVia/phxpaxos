@@ -146,16 +146,10 @@ function install_glog()
 
     go_back;
     cd $lib_name;
-    ./autogen.sh
-    exist_gflags_dir="../gflags";
-    if [ -d $exist_gflags_dir ]; then
-        # use local gflags
-        ./configure CXXFLAGS=-fPIC --prefix=$(pwd) --with-gflags=$exist_gflags_dir;
-    else
-        # use system gflags
-        ./configure CXXFLAGS=-fPIC --prefix=$(pwd);
-    fi
-    make && make install;
+    
+    cmake -DBUILD_SHARED_LIBS=OFF -S . -B build -G "Unix Makefiles" -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_FLAGS="-fPIC" -DCMAKE_INSTALL_PREFIX=$(pwd);
+    cmake --build build --parallel $(nproc);
+    cmake --build build --target install;
 
     check_lib_exist $lib_name;
     if [ $? -eq 1 ]; then
