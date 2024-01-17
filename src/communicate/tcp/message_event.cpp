@@ -405,7 +405,7 @@ void MessageEvent :: OnError(bool & bNeedDelete)
     {
         if (IsActive())
         {
-            AddTimer(200, MessageEventTimerType_Reconnect, m_iReconnectTimeoutID);
+            AddTimer(2000, MessageEventTimerType_Reconnect, m_iReconnectTimeoutID);
         }
         else
         {
